@@ -1,2 +1,2 @@
 # JUCE_audio_experiments
-Various Audio Plug-in experiments in JUCE
+Various audio plug-in experiments and assignments in JUCE.
