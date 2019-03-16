@@ -27,6 +27,8 @@ public:
     void resized() override;
 
 private:
+    Slider mGainControlSlider;      // Gain control slider.
+    
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     Gain_pluginAudioProcessor& processor;

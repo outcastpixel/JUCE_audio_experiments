@@ -24,6 +24,9 @@ Gain_pluginAudioProcessor::Gain_pluginAudioProcessor()
                        )
 #endif
 {
+    DBG("PluginProcessor Constructor");
+    addParameter(mGainParameter = new AudioParameterFloat("gain","Gain",0.0f,1.0f,0.5f));
+    mGainSmoothed = mGainParameter->get();
 }
 
 Gain_pluginAudioProcessor::~Gain_pluginAudioProcessor()
@@ -131,6 +134,8 @@ bool Gain_pluginAudioProcessor::isBusesLayoutSupported (const BusesLayout& layou
 
 void Gain_pluginAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffer& midiMessages)
 {
+    DBG("PluginProcessor->processBlock.");
+    
     ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -142,19 +147,36 @@ void Gain_pluginAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBu
     // when they first compile a plugin, but obviously you don't need to keep
     // this code if your algorithm always overwrites all the output channels.
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
-
+    {
+       buffer.clear (i, 0, buffer.getNumSamples());
+    }
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    
+    //DBG(*mGainParameter);
+    
+    float* leftChannel = nullptr;
+    float* rightChannel = nullptr;
+    
+    if (totalNumInputChannels == 1)
     {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
+        leftChannel = buffer.getWritePointer(0);
+    }
+    else if (totalNumInputChannels == 2)
+    {
+        leftChannel = buffer.getWritePointer(0);
+        rightChannel = buffer.getWritePointer(1);
+    }
+    
+    for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+    {
+        mGainSmoothed = mGainSmoothed - 0.004 * (mGainSmoothed - mGainParameter->get());
+        if (leftChannel != nullptr) leftChannel[sample] *= mGainSmoothed;
+        if (rightChannel != nullptr) rightChannel[sample] *= mGainSmoothed;
     }
 }
 

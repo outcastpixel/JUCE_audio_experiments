@@ -18,6 +18,30 @@ Gain_pluginAudioProcessorEditor::Gain_pluginAudioProcessorEditor (Gain_pluginAud
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+    
+    auto& parameters = processor.getParameters();
+    AudioParameterFloat* gainParameter = (AudioParameterFloat*)parameters.getUnchecked(0);
+    
+    mGainControlSlider.setBounds(0, 0, 100, 100);
+    mGainControlSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
+    mGainControlSlider.setTextBoxStyle(Slider::NoTextBox, true, 0, 0);
+    mGainControlSlider.setRange(gainParameter->range.start, gainParameter->range.end);
+    mGainControlSlider.setValue(*gainParameter);
+    
+    mGainControlSlider.onDragStart = [gainParameter] {
+        gainParameter->beginChangeGesture();
+    };
+    
+    mGainControlSlider.onValueChange = [this, gainParameter] {
+        DBG("PluginEditor->onValueChange");
+        *gainParameter = mGainControlSlider.getValue();
+    };
+    
+    mGainControlSlider.onDragEnd = [gainParameter] {
+        gainParameter->endChangeGesture();
+    };
+    
+    addAndMakeVisible(mGainControlSlider);
 }
 
 Gain_pluginAudioProcessorEditor::~Gain_pluginAudioProcessorEditor()
