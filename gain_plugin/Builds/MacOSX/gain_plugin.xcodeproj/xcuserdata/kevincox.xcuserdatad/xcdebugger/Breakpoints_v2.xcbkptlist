@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/PluginProcessor.cpp"
+            timestampString = "574404531.866693"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "Gain_pluginAudioProcessor::processBlock (AudioBuffer&lt;float&gt;&amp; buffer, MidiBuffer&amp; midiMessages)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Gain_pluginAudioProcessor::processBlock(juce::AudioBuffer&lt;float&gt;&amp;, juce::MidiBuffer&amp;)"
+                  moduleName = "gain_plugin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincox/LocalDev/JUCE_audio_experiments/gain_plugin/Source/PluginProcessor.cpp"
+                  timestampString = "574404532.111823"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "35">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Gain_pluginAudioProcessor::processBlock(juce::AudioBuffer&lt;float&gt;&amp;, juce::MidiBuffer&amp;)"
+                  moduleName = "gain_plugin"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevincox/LocalDev/JUCE_audio_experiments/gain_plugin/Source/PluginProcessor.cpp"
+                  timestampString = "574404532.1137559"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "90">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
